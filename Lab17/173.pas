@@ -5,9 +5,7 @@ VAR
   Ch: CHAR;
   
   
-PROCEDURE Division(VAR Dvd, Dvr, ResultD, ResultM, I: INTEGER);
-VAR
-  Result: INTEGER;   
+PROCEDURE Division(VAR Dvd, Dvr, ResultD, ResultM, I: INTEGER);   
 BEGIN{Division}
   IF (Dvd DIV 10) > 10
   THEN
@@ -16,7 +14,11 @@ BEGIN{Division}
     END
   ELSE
     BEGIN
-      Result := Result * 10 + Dvd DIV Dvr;
+      IF I = 2 
+      THEN
+        ResultD := ResultD * 10 + Dvd DIV Dvr
+      ELSE
+        ResultM := ResultM * 10 + Dvd DIV Dvr;
       Dvd := Dvd MOD Dvr;
       IF (Dvd > 0) AND (I > 0) AND (Dvd < Dvr)
       THEN
@@ -25,9 +27,7 @@ BEGIN{Division}
           I := I - 1;
           Division(Dvd, Dvr, ResultD, ResultM, I);             
         END;    
-    END;
-  ResultD := Result DIV 100;
-  ResultM := Result MOD 100;      
+    END;    
 END; {Division}
 
 PROCEDURE ReadDigit(VAR F: TEXT; VAR Digit: INTEGER);
@@ -85,7 +85,7 @@ BEGIN{ReadNumber}
   DO
     ReadDigit(F, Digit);
   Num := Digit; 
-  WHILE (Digit < 32767) AND (NOT EOLN) AND (Digit <> -1)
+  WHILE (Digit < 32767) AND (NOT EOLN(F)) AND (Digit <> -1)
   DO
     BEGIN
       ReadDigit(F, Digit);
@@ -113,7 +113,6 @@ BEGIN
   MaxNum := -1;
   MinNum := 32767;
   AverageNum := 0;
-  Two := 2;
   AverageNumM := 0; 
   REWRITE(F);
   WHIlE NOT EOLN(INPUT)
@@ -136,17 +135,21 @@ BEGIN
         MinNum := Num;
       I := I + 1;    
     END;
-  RESET(F);   
+  RESET(F);  
   WHILE NOT EOLN(F)
   DO
     BEGIN
+      ResultM := 0;
+      ResultD := 0;
+      Two := 2;
       ReadNumber(F, Num);
       Division(Num, I, ResultD, ResultM, Two);
       AverageNum := AverageNum + ResultD;
       AverageNumM := AverageNumM + ResultM;
-    END;
+      WRITELN(ResultD, ' ', ResultM);
+    END; 
   AverageNum := AverageNum + (AverageNumM DIV 100);
-  AverageNum := AverageNumM MOD 100;    
+  AverageNumM := AverageNumM MOD 100;     
   WRITELN('Max number: ', MaxNum);
   WRITELN('Min number: ', MinNum);
   WRITELN('Average number: ', AverageNum, '.', AverageNumM);      
