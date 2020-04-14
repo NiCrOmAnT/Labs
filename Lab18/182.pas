@@ -2,6 +2,7 @@ PROGRAM AverageScore(INPUT, OUTPUT);
 CONST
   NumberOfScores = 4;
   ClassSize = 4;
+  MaxScore = 100;
 TYPE
   Score = 0 .. 100;
 VAR
@@ -29,11 +30,11 @@ BEGIN {AverageScore}
           WRITE(F, Ch);
         END;
       WRITELN(F);  
-      WHILE WhichScore <= 4
+      WHILE WhichScore <= NumberOfScores
       DO
         BEGIN
           READ(NextScore);
-          IF NextScore > 100
+          IF NextScore > MaxScore
           THEN
             BEGIN
               WRITE('Incorrect score, enter again ');
