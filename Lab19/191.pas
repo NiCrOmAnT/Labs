@@ -3,9 +3,9 @@ CONST
   Max = 100;
   Min = 2;
 VAR
-  I, CurNum, PrimeNumber: INTEGER;
+  I, CurNum: INTEGER;
   IsPrime: BOOLEAN;
-  NumberPool : SET  OF 0..Max;
+  NumberPool: SET  OF 0..Max;
 BEGIN {Prime}
   NumberPool := [Min..Max];
   I := Min;
