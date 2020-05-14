@@ -11,7 +11,7 @@ VAR
   Matrix: Display;
   FIn: TEXT;
   FirstRow: Boolean;
-  
+  BrushPool: SET OF 'A'..'Z';  
   
 PROCEDURE DefineSymbol(VAR Symbol: CHAR; VAR Matrix: Display);
 BEGIN
@@ -94,6 +94,7 @@ BEGIN
       FirstRow := FALSE;
       Col := Col + 1;  
     END;
+  BrushPool := BrushPool + [Ch];    
   PrintSymbol(Matrix); 
 END.  
 
