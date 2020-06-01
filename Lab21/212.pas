@@ -9,7 +9,7 @@ TYPE
 VAR
   Msg: Str;
   Code: Chiper;
-  Spaces, StrLen: 1..Len;
+  StrLen: 1..Len;
   I: 0..Len;
   ChiperFile: TEXT;
   Error: Boolean;
@@ -17,8 +17,8 @@ VAR
 PROCEDURE Initialize(VAR Code: Chiper);
 VAR
   CodeSymbol, CurrentSymbol, Ch: CHAR;
-  UsedSymbols : SET OF CHAR;
-  CodedSymbols : SET OF CHAR;
+  UsedSymbols: SET OF CHAR;
+  CodedSymbols: SET OF CHAR;
 {Присвоить Code шифр замены}
 BEGIN {Initialize}
   RESET(ChiperFile);
@@ -81,7 +81,6 @@ BEGIN {Encryption}
       BEGIN
         {читать строку в Msg и распечатать ее}
         I := 0;
-        Spaces := 1;
         WHILE NOT EOLN AND (I < Len)
         DO
           BEGIN

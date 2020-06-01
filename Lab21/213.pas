@@ -9,12 +9,12 @@ TYPE
 VAR
   Msg: Str;
   Code: Chiper;
-  Spaces, StrLen: 1..Len;
+  StrLen: 1..Len;
   I: 0..Len;
   ChiperFile: TEXT;
   Error, InvalidMsg: Boolean;
-  UsedSymbols : SET OF CHAR;
-  CodedSymbols : SET OF CHAR;
+  UsedSymbols: SET OF CHAR;
+  CodedSymbols: SET OF CHAR;
  
 PROCEDURE Initialize(VAR Code: Chiper);
 VAR
@@ -84,7 +84,6 @@ BEGIN {Decryption}
       BEGIN
         {читать строку в Msg и распечатать ее}
         I := 0;
-        Spaces := 1;
         WHILE NOT EOLN AND (I < Len)
         DO
           BEGIN
@@ -99,7 +98,6 @@ BEGIN {Decryption}
         Decode(Msg) 
       END
   ELSE
-    WRITELN('Ошибка в файле кодировки');
-          
+    WRITELN('Ошибка в файле кодировки');  
 END.  {Decryption}
 

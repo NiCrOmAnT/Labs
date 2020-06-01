@@ -9,7 +9,7 @@ TYPE
 VAR
   Msg: Str;
   Code: Chiper;
-  Spaces, StrLen: 1..Len;
+  StrLen: 1..Len;
   I: 0..Len;
  
 PROCEDURE Initialize(VAR Code: Chiper);
@@ -70,7 +70,6 @@ BEGIN {Encryption}
     BEGIN
       {читать строку в Msg и распечатать ее}
       I := 0;
-      Spaces := 1;
       WHILE NOT EOLN AND (I < Len)
       DO
         BEGIN

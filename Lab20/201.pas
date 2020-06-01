@@ -47,7 +47,9 @@ BEGIN
 END;
 
 BEGIN
-  READ(Ch);
+  IF NOT EOLN
+  THEN
+    READ(Ch);
   CorrectSymbol := TRUE;
   DefineSymbol(Ch, Matrix);
   IF CorrectSymbol
