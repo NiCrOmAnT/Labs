@@ -45,7 +45,7 @@ BEGIN
   END;
 END;
 
-PROCEDURE PrintSymbol(Matrix: Display);
+PROCEDURE PrintSymbol(VAR Brush: CHAR; Matrix: Display);
 VAR
   I, J: INTEGER;
 BEGIN  
@@ -95,6 +95,6 @@ BEGIN
       Col := Col + 1;  
     END;
   BrushPool := BrushPool + [Ch];    
-  PrintSymbol(Matrix); 
+  PrintSymbol(Brush, Matrix); 
 END.  
 

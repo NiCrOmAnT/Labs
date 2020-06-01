@@ -1,5 +1,5 @@
-XXXXX
-  X  
-  X  
-  X  
-XXXXX
+CCCCC
+  C  
+  C  
+  C  
+CCCCC
