@@ -49,27 +49,29 @@ END;
 BEGIN
   IF NOT EOLN
   THEN
+  BEGIN
     READ(Ch);
-  CorrectSymbol := TRUE;
-  DefineSymbol(Ch, Matrix);
-  IF CorrectSymbol
-  THEN
-    FOR I := 0 TO (Col - 1)  
-    DO
-      BEGIN
-        FOR J := 1 TO ROW
-        DO
-          BEGIN
-            IF (I * Col + J) IN Matrix
-            THEN
-              WRITE('X')
-            ELSE
-              WRITE(' ');              
-          END;
-        WRITELN;      
-      END
-  ELSE
-    WRITE('Incorrect symbol');
+    CorrectSymbol := TRUE;
+    DefineSymbol(Ch, Matrix);
+    IF CorrectSymbol
+    THEN
+      FOR I := 0 TO (Col - 1)  
+      DO
+        BEGIN
+          FOR J := 1 TO ROW
+          DO
+            BEGIN
+              IF (I * Col + J) IN Matrix
+              THEN
+                WRITE('X')
+              ELSE
+                WRITE(' ');              
+            END;
+          WRITELN;      
+        END
+    ELSE
+      WRITE('Incorrect symbol');
+  END;    
   WRITELN;        
 END.  
 
