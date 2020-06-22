@@ -22,7 +22,7 @@ BEGIN {GetStatistic}
             InsertWord(Wd, Root);  
         END;
       PrintTree(Root, FOut); 
-//      ClearTree(Root);      
+      ClearTree(Root);      
     END;
   WRITELN(Fout);
 END;  {GetStatistic}

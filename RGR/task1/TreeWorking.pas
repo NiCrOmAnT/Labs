@@ -13,7 +13,7 @@ TYPE
     
   PROCEDURE InsertWord(VAR Data: STRING; VAR Ptr: Tree);           //Добавление нового слова в узел дерева
   PROCEDURE PrintTree(VAR Ptr: Tree; VAR FOut: TEXT);              //Вывод отсортированного дерева в выходной файл
-//  PROCEDURE ClearTree(VAR Ptr: Tree);                            //Очистка дерева
+  PROCEDURE ClearTree(VAR Ptr: Tree);                            //Очистка дерева
 IMPLEMENTATION
  
   PROCEDURE InsertWord(VAR Data: STRING; VAR Ptr: Tree);
@@ -50,14 +50,18 @@ IMPLEMENTATION
       END;
   END;  {PrintTree}
   
-//  PROCEDURE ClearTree(VAR Ptr: Tree);
-//  BEGIN {ClearTree}
-//    ClearTree(Ptr^.LLink);
-//    Ptr^.LLink := NIL;
-//    Ptr^.Wd := '';
-//    Ptr^.Amount := 0;
-//    ClearTree(Ptr^.RLink);
-//    Ptr^.RLink := NIL;
-//  END;  {ClearTree}
+  PROCEDURE ClearTree(VAR Ptr: Tree);
+  BEGIN {ClearTree}
+    IF Ptr <> NIL
+      THEN
+        BEGIN
+          ClearTree(Ptr^.LLink);
+          Ptr^.LLink := NIL;
+          Ptr^.Wd := '';
+          Ptr^.Amount := 0;
+          ClearTree(Ptr^.RLink);
+          Ptr^.RLink := NIL;
+        END;  
+  END;  {ClearTree}
 BEGIN                                                
 END.
