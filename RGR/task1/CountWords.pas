@@ -7,6 +7,7 @@ PROCEDURE GetStatistic(VAR FIn, FOut: TEXT);
 VAR
   Wd: STRING;
   Root: Tree;
+  Overflow: BOOL
 BEGIN {GetStatistic}
   RESET(FIn);
   IF NOT EOF(FIn)

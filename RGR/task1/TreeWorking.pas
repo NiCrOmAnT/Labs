@@ -56,12 +56,11 @@ IMPLEMENTATION
       THEN
         BEGIN
           ClearTree(Ptr^.LLink);
-          Ptr^.LLink := NIL;
-          Ptr^.Wd := '';
-          Ptr^.Amount := 0;
           ClearTree(Ptr^.RLink);
-          Ptr^.RLink := NIL;
+          DISPOSE(Ptr);
+          Ptr := NIL;
         END;  
   END;  {ClearTree}
+  
 BEGIN                                                
 END.
