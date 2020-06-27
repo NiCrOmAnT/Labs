@@ -45,7 +45,7 @@ BEGIN
   END;
 END;
 
-PROCEDURE PrintSymbol(VAR Brush: CHAR; Matrix: Display);
+PROCEDURE XPrint(VAR Brush: CHAR; Matrix: Display);
 VAR
   I, J: INTEGER;
 BEGIN  
