@@ -25,7 +25,7 @@ IMPLEMENTATION
   BEGIN {GetWord}
     Wd := '';
     READ(FIn, Ch);
-    IF Ch IN Letters
+    IF Ch IN Letters              
     THEN
       BEGIN
         WHILE (Ch IN Letters) AND (NOT EOF(FIn))

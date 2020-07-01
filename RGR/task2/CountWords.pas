@@ -4,7 +4,7 @@ USES
   WordWorking;
 
 CONST
-  MaxNodes = 24000;
+  MaxNodes = 14000;
     
 PROCEDURE GetStatistic(VAR FIn, FOut: TEXT);
 VAR

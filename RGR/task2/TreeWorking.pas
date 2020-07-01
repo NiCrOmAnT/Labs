@@ -22,38 +22,51 @@ IMPLEMENTATION
 
   PROCEDURE MergeTree(VAR FTempIn, FTempOut: TEXT; VAR Ptr: Tree; VAR TreeWord, FileWord: STRING; VAR TreeAmount, FileAmount: INTEGER);
   VAR
-    IsEqual: BOOLEAN;
+    IsMore, IsLess, IsEqual, Flag: BOOLEAN;
   BEGIN {MergeTree}
     IF (Ptr <> NIL)
     THEN
       BEGIN
         MergeTree(FTempIn, FTempOut, Ptr^.LLink, TreeWord, FileWord, TreeAmount, FileAmount);
         IsEqual := FALSE;
+        IsLess := FALSE;
         TreeWord := Ptr^.Wd;
         TreeAmount := Ptr^.Amount;
-        WHILE (FileWord < TreeWord) AND (NOT EOF(FTempIn))
+        IF (FileWord < TreeWord) AND (NOT EOF(FTempIn))
+        THEN
+          BEGIN  
+            WRITELN(FTempOut, FileWord, ' ', FileAmount);
+          END
+        ELSE 
+          IF (FileWord = TreeWord) AND (NOT EOF(FTempIn))
+          THEN
+            BEGIN
+              WRITELN(FTempOut, FileWord, ' ', FileAmount + TreeAmount);
+              IsEqual := TRUE;      
+            END
+          ELSE
+            IsLess := TRUE;  
+        WHILE (NOT IsLess) AND (NOT EOF(FTempIn))
         DO
           BEGIN
-            WRITELN(FTempOut, FileWord, ' ', FileAmount);
             GetWord(FTempIn, FileWord);
-            READLN(FTempIn, FileAmount);  
-          END;
-        IF FileWord < TreeWord
-        THEN  
-          WRITELN(FTempOut, FileWord, ' ', FileAmount);          
-        IF FileWord = TreeWord
-        THEN
-          BEGIN
-            WRITELN(FTempOut, FileWord, ' ', FileAmount + TreeAmount);
-            GetWord(FTempIn, FileWord);    
             READLN(FTempIn, FileAmount);
-            IsEqual := TRUE;
-          END;
-        IF (TreeWord < FileWord) AND (NOT IsEqual) 
-        THEN
-          BEGIN
-            WRITELN(FTempOut, TreeWord, ' ', TreeAmount);
-          END;       
+            IF FileWord < TreeWord
+            THEN  
+              WRITELN(FTempOut, FileWord, ' ', FileAmount)
+            ELSE 
+              IF FileWord = TreeWord 
+              THEN
+                BEGIN
+                  WRITELN(FTempOut, FileWord, ' ', FileAmount + TreeAmount);
+                  IsEqual := TRUE;
+                END
+              ELSE
+                IsLess := TRUE;               
+          END; 
+        IF NOT IsEqual
+        THEN        
+          WRITELN(FTempOut, TreeWord, ' ', TreeAmount);       
         MergeTree(FTempIn, FTempOut, Ptr^.RLink, TreeWord, FileWord, TreeAmount, FileAmount);      
       END;   
   END;  {MergeTree}
@@ -70,14 +83,18 @@ IMPLEMENTATION
     TreeAmount := 0;
     READLN(FTempIN);
     MergeTree(FTempIn, FTempOut, Ptr, TreeWord, FileWord, TreeAmount, FileAmount);  
-    WHILE NOT EOF(FTempIn)
-    DO
+    IF NOT EOF(FTempIn)
+    THEN
       BEGIN
+        WHILE NOT EOF(FTempIn)
+        DO
+          BEGIN
+            WRITELN(FTempOut, FileWord, ' ', FileAmount);
+            GetWord(FTempIn, FileWord); 
+            READLN(FTempIn, FileAmount);
+          END;
         WRITELN(FTempOut, FileWord, ' ', FileAmount);
-        GetWord(FTempIn, FileWord); 
-        READLN(FTempIn, FileAmount);
-      END;
-    WRITELN(FTempOut, FileWord, ' ', FileAmount); 
+      END;  
   END;  {Merge}
   
  
