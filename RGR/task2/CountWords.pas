@@ -4,7 +4,7 @@ USES
   WordWorking;
 
 CONST
-  MaxNodes = 14000;
+  MaxNodes = 25000;
     
 PROCEDURE GetStatistic(VAR FIn, FOut: TEXT);
 VAR
@@ -57,8 +57,9 @@ BEGIN {GetStatistic}
           Merge(FTemp1, FOut, Root);    
         END;
       ClearTree(Root);       
-    END;
-  WRITELN(Fout);
+    END
+  ELSE  
+    WRITELN(Fout);
 END;  {GetStatistic}
   
 BEGIN {CountWords}

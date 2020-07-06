@@ -32,10 +32,13 @@ IMPLEMENTATION
         IsLess := FALSE;
         TreeWord := Ptr^.Wd;
         TreeAmount := Ptr^.Amount;
-        IF (FileWord < TreeWord) AND (NOT EOF(FTempIn))
+        IF (FileWord < TreeWord) AND (FileWord <> 'EOF')
         THEN
           BEGIN  
             WRITELN(FTempOut, FileWord, ' ', FileAmount);
+            IF EOF(FTempIn)
+            THEN
+              FileWord := 'EOF';
           END
         ELSE 
           IF (FileWord = TreeWord) AND (NOT EOF(FTempIn))
@@ -52,8 +55,13 @@ IMPLEMENTATION
             GetWord(FTempIn, FileWord);
             READLN(FTempIn, FileAmount);
             IF FileWord < TreeWord
-            THEN  
-              WRITELN(FTempOut, FileWord, ' ', FileAmount)
+            THEN
+              BEGIN  
+                WRITELN(FTempOut, FileWord, ' ', FileAmount);
+                IF EOF(FTempIn)
+                THEN
+                  FileWord := 'EOF'
+              END  
             ELSE 
               IF FileWord = TreeWord 
               THEN
@@ -83,16 +91,14 @@ IMPLEMENTATION
     TreeAmount := 0;
     READLN(FTempIN);
     MergeTree(FTempIn, FTempOut, Ptr, TreeWord, FileWord, TreeAmount, FileAmount);  
-    IF NOT EOF(FTempIn)
+    IF FileWord <> 'EOF'
     THEN
+      WRITELN(FTempOut, FileWord, ' ', FileAmount);
+    WHILE NOT EOF(FTempIn)
+    DO
       BEGIN
-        WHILE NOT EOF(FTempIn)
-        DO
-          BEGIN
-            WRITELN(FTempOut, FileWord, ' ', FileAmount);
-            GetWord(FTempIn, FileWord); 
-            READLN(FTempIn, FileAmount);
-          END;
+        GetWord(FTempIn, FileWord); 
+        READLN(FTempIn, FileAmount);
         WRITELN(FTempOut, FileWord, ' ', FileAmount);
       END;  
   END;  {Merge}

@@ -10,14 +10,14 @@ PROCEDURE GetWord(VAR FIn: TEXT; VAR Wd: STRING); //Получение одного слова из вх
 
 IMPLEMENTATION
   PROCEDURE ToLowerCase(VAR Symbol: CHAR);
-  BEGIN
+  BEGIN {ToLowerCase}
     IF Symbol IN UpperRusLetters
     THEN
       Symbol := CHR(ORD(Symbol) + LetterDist);
     IF Symbol IN ['Ё', 'ё']
     THEN
       Symbol := 'е';      
-  END;
+  END;  {ToLowerCase}
   
   PROCEDURE GetWord(VAR FIn: TEXT; VAR Wd: STRING);
   VAR
